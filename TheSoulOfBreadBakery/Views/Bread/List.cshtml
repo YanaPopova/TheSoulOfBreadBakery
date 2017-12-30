@@ -1,0 +1,21 @@
+﻿@model TheSoulOfBreadBakery.ViewModels.BreadListViewModel
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>The Soul Of The Bread Bakery</title>
+</head>
+<body>
+    <h1>@Model.CurrentCategory</h1>
+    @foreach (var bread in Model.Breads)
+    {
+        <div>
+            <h2>@bread.Name</h2>
+            <h3>@bread.Price.ToString("c")</h3>
+            <h4>@bread.Category.CategoryName</h4>
+        </div>
+    }
+</body>
+</html>
