@@ -5,11 +5,25 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>The Soul Of The Bread Bakery</title>
+    <title>The Soul Of Bread Bakery</title>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Source+Sans+Pro" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/content/site.css" rel="stylesheet" />
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
 </head>
 <body>
-    <div>
-        @RenderBody()
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <p class="lead">
+                    <img class="img-responsive" alt="The Soul Of Bread Bakery" src="~/images/logo.png" />
+                </p>
+            </div>
+            <div class="col-lg-9">
+                @RenderBody()
+            </div>
+        </div>
     </div>
 </body>
 </html>
