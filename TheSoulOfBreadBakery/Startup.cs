@@ -5,6 +5,7 @@ using TheSoulOfBreadBakery.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Http;
 
 namespace TheSoulOfBreadBakery
 {
@@ -32,7 +33,13 @@ namespace TheSoulOfBreadBakery
             services.AddTransient<IBreadRepository, BreadRepository>();
             services.AddTransient<ICategoryRepository, CategoryRepository>();
 
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<ShoppingCart>(sp => ShoppingCart.GetCart(sp));
+
             services.AddMvc();
+
+            services.AddMemoryCache();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,6 +48,7 @@ namespace TheSoulOfBreadBakery
             app.UseDeveloperExceptionPage();
             app.UseStatusCodePages();
             app.UseStaticFiles();
+            app.UseSession();
             app.UseMvcWithDefaultRoute();
 
             DbInitializer.Seed(app);

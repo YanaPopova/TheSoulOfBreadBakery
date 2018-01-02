@@ -29,6 +29,10 @@
         white-space: nowrap;
     }
 
+.caption {
+    font-size: 8px;
+}
+
 .thumbnail img {
     width: 100%;
 }

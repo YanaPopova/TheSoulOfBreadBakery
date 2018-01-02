@@ -1,21 +1,8 @@
 ﻿@model BreadListViewModel
-@using System.Globalization
 
 
     @ViewBag.CurrentCategory
     @foreach (var bread in Model.Breads)
     {
-        <div class="col-sm-4 col-lg-4 col-md-4">
-            <div class="thumbnail">
-                <img src="@bread.ImageThumbnailUrl" alt="" />
-                <div class="caption">
-                    <h3 class="pull-right">@bread.Price.ToString("c", CultureInfo.CreateSpecificCulture("fr-FR"))</h3>
-                    <h3>
-                        <a>@bread.Name</a>
-                    </h3>
-                    <p>@bread.ShortDescription</p>
-                </div>
-            </div>
-            
-        </div>
+        @Html.Partial("BreadOverviewSummary", bread)
     }

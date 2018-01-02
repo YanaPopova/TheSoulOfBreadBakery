@@ -15,5 +15,6 @@ namespace TheSoulOfBreadBakery.Models
 
         public DbSet<Category> Categories { get; set; }
         public DbSet<Bread> Breads { get; set; }
+        public DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
     }
 }
