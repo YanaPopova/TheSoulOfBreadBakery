@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Linq;
 using TheSoulOfBreadBakery.Models;
 using TheSoulOfBreadBakery.ViewModels;
 
@@ -17,13 +19,36 @@ namespace TheSoulOfBreadBakery.Controllers
             _categoryRepository = categoryRepository;
         }
 
-        public ViewResult List()
+        public ViewResult List(string category)
         {
-            BreadListViewModel breadListViewModel = new BreadListViewModel();
-            breadListViewModel.Breads = _breadRepository.Breads;
+            IEnumerable<Bread> breads;
+            string currentCategory = string.Empty;
 
-            breadListViewModel.CurrentCategory = "Fruit bread";
-            return View(breadListViewModel);
+            if (string.IsNullOrEmpty(category))
+            {
+                breads = _breadRepository.Breads.OrderBy(b => b.BreadId);
+                currentCategory = "All products";
+            }
+            else
+            {
+                breads = _breadRepository.Breads.Where(b => b.Category.CategoryName == category).OrderBy(b => b.BreadId);
+                currentCategory = _categoryRepository.Categories.FirstOrDefault(c => c.CategoryName == category).CategoryName;
+            }
+
+            return View(new BreadListViewModel
+            {
+                Breads = breads,
+                CurrentCategory = currentCategory
+            });
+        }
+
+        public IActionResult Details(int id)
+        {
+            var bread = _breadRepository.GetBreadById(id);
+            if (bread == null)
+                return NotFound();
+
+            return View(bread);
         }
     }
 }

@@ -4,7 +4,6 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace TheSoulOfBreadBakery.Models
 {
@@ -12,7 +11,7 @@ namespace TheSoulOfBreadBakery.Models
     {
         private readonly AppDbContext _appDbContext;
 
-        public ShoppingCart(AppDbContext appDbContext)
+        private ShoppingCart(AppDbContext appDbContext)
         {
             _appDbContext = appDbContext;
         }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using TheSoulOfBreadBakery.Models;
 using TheSoulOfBreadBakery.ViewModels;
@@ -42,6 +39,17 @@ namespace TheSoulOfBreadBakery.Controllers
             if (selectedBread != null)
             {
                 _shoppingCart.AddToCart(selectedBread, 1);
+            }
+            return RedirectToAction("Index");
+        }
+
+        public RedirectToActionResult RemoveFromShoppingCart(int breadId)
+        {
+            var selectedBread = _breadRepository.Breads.FirstOrDefault(b => b.BreadId == breadId);
+
+            if (selectedBread != null)
+            {
+                _shoppingCart.RemoveFromCart(selectedBread);
             }
             return RedirectToAction("Index");
         }

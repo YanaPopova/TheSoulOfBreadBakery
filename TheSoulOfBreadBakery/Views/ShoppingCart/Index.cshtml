@@ -2,7 +2,6 @@
 @using System.Globalization 
 
 <h2>Your shopping cart</h2>
-<h4>Here are the delicious breads in your shopping cart.</h4>
 <table class="table table-bordered table-striped">
     <thead>
         <tr>
@@ -15,12 +14,13 @@
     <tbody>
         @foreach (var line in Model.ShoppingCart.ShoppingCartItems)
         {
-            <tr>
-                <td class="text-center">@line.Amount</td>
-                <td class="text-left">@line.Bread.Name</td>
-                <td class="text-right">@line.Bread.Price.ToString("c", CultureInfo.CreateSpecificCulture("fr-FR"))</td>
-                <td class="text-right">@((line.Amount * line.Bread.Price).ToString("c", CultureInfo.CreateSpecificCulture("fr-FR")))</td>
-            </tr>
+        <tr>
+            <td class="text-center">@line.Amount</td>
+
+            <td class="text-left">@line.Bread.Name</td>
+            <td class="text-right">@line.Bread.Price.ToString("c", CultureInfo.CreateSpecificCulture("fr-FR"))</td>
+            <td class="text-right">@((line.Amount * line.Bread.Price).ToString("c", CultureInfo.CreateSpecificCulture("fr-FR")))</td>
+        </tr>
         }
     </tbody>
     <tfoot>
