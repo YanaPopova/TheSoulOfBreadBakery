@@ -11,9 +11,10 @@ using TheSoulOfBreadBakery.Models;
 namespace TheSoulOfBreadBakery.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180104144311_OrderOrderDetails")]
+    partial class OrderOrderDetails
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

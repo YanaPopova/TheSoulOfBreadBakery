@@ -30,11 +30,12 @@ namespace TheSoulOfBreadBakery
             //services.AddTransient<ICategoryRepository, MockCategoryRepository>();
             //services.AddTransient<IBreadRepository, MockBreadRepository>();
 
+            //register repositories with the dependency injection container
             services.AddTransient<IBreadRepository, BreadRepository>();
             services.AddTransient<ICategoryRepository, CategoryRepository>();
-
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<ShoppingCart>(sp => ShoppingCart.GetCart(sp));
+            services.AddTransient<IOrderRepository, OrderRepository>();
 
             services.AddMvc();
 
