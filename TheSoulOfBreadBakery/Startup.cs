@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 
 namespace TheSoulOfBreadBakery
 {
@@ -26,6 +27,10 @@ namespace TheSoulOfBreadBakery
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(_configurationRoot.GetConnectionString("DefaultConnection")));
+            //services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<AppDbContext>()
+                .AddDefaultTokenProviders();
 
             //services.AddTransient<ICategoryRepository, MockCategoryRepository>();
             //services.AddTransient<IBreadRepository, MockBreadRepository>();
@@ -50,6 +55,7 @@ namespace TheSoulOfBreadBakery
             app.UseStatusCodePages();
             app.UseStaticFiles();
             app.UseSession();
+            app.UseAuthentication();
 
             //app.UseMvcWithDefaultRoute();
             app.UseMvc(routes =>
