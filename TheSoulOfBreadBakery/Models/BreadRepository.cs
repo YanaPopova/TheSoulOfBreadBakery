@@ -35,5 +35,17 @@ namespace TheSoulOfBreadBakery.Models
         {
             return _appDbContext.Breads.FirstOrDefault(b => b.BreadId == breadId);
         }
+
+        public void UpdateBread(Bread bread)
+        {
+            _appDbContext.Breads.Update(bread);
+            _appDbContext.SaveChanges();
+        }
+
+        public void CreateBread(Bread bread)
+        {
+            _appDbContext.Breads.Add(bread);
+            _appDbContext.SaveChanges();
+        }
     }
 }

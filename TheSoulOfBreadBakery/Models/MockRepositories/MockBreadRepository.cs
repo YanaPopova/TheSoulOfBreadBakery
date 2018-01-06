@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TheSoulOfBreadBakery.Models
+namespace TheSoulOfBreadBakery.Models.MockRepositories
 {
     public class MockBreadRepository : IBreadRepository
     {
@@ -25,7 +25,17 @@ namespace TheSoulOfBreadBakery.Models
 
         public IEnumerable<Bread> BreadsOfTheWeek { get; }
 
+        public void CreateBread(Bread bread)
+        {
+            throw new NotImplementedException();
+        }
+
         public Bread GetBreadById(int breadId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateBread(Bread bread)
         {
             throw new NotImplementedException();
         }

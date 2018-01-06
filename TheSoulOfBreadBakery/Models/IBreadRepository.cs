@@ -11,5 +11,9 @@ namespace TheSoulOfBreadBakery.Models
         IEnumerable<Bread> BreadsOfTheWeek { get; }
 
         Bread GetBreadById(int breadId);
+
+        void CreateBread(Bread bread);
+
+        void UpdateBread(Bread bread);
     }
 }
