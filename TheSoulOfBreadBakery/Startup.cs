@@ -49,6 +49,7 @@ namespace TheSoulOfBreadBakery
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<ShoppingCart>(sp => ShoppingCart.GetCart(sp));
             services.AddTransient<IOrderRepository, OrderRepository>();
+            //services.AddTransient<IBreadReviewRepository, BreadReviewRepository>();
             services.AddTransient<IEmailSender, EmailSender>();
 
             services.AddMvc();

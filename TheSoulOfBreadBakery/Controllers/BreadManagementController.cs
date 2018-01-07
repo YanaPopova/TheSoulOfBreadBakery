@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using TheSoulOfBreadBakery.Models;
 using TheSoulOfBreadBakery.ViewModels;
@@ -42,11 +43,27 @@ namespace TheSoulOfBreadBakery.Controllers
         public IActionResult AddBread(BreadEditViewModel breadEditViewModel)
         {
             //Basic validation
+            //if (ModelState.IsValid)
+            //{
+            //    _breadRepository.CreateBread(breadEditViewModel.Bread);
+            //    return RedirectToAction("Index");
+            //}
+            //return View(breadEditViewModel);
+
+            //Custom validation
+            if (ModelState.GetValidationState("Bread.Price") == ModelValidationState.Valid
+                || breadEditViewModel.Bread.Price < 0)
+                ModelState.AddModelError(nameof(breadEditViewModel.Bread.Price), "The price of the bread should be higher than 0");
+
+            if (breadEditViewModel.Bread.IsBreadOfTheWeek && !breadEditViewModel.Bread.InStock)
+                ModelState.AddModelError(nameof(breadEditViewModel.Bread.IsBreadOfTheWeek), "Only bread that are in stock should be Bread of the Week");
+
             if (ModelState.IsValid)
             {
                 _breadRepository.CreateBread(breadEditViewModel.Bread);
                 return RedirectToAction("Index");
             }
+
             return View(breadEditViewModel);
         }
 
