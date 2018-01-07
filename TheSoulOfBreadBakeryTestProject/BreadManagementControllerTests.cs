@@ -77,5 +77,33 @@ namespace TheSoulOfBreadBakeryTestProject
             Assert.NotNull(viewResult.Model);
             Assert.True(string.IsNullOrEmpty(viewResult.ViewName));
         }
+
+        [Theory]
+        [InlineData(0)]
+        [InlineData(-10)]
+        public void AddBread_ReturnsViewResultWithViewModel_InvalidBreadViewModel_NegativePrice(int price)
+        {
+            //arrange
+            var breadEditViewModel = new BreadEditViewModel();
+            var mockBreadRepository = RepositoryMocks.GetBreadRepository();
+            var bread = mockBreadRepository.Object.GetBreadById(1);
+            bread.IsBreadOfTheWeek = true;
+            bread.InStock = false;
+            bread.Price = price;
+            breadEditViewModel.Bread = bread;
+            breadEditViewModel.CategoryId = 1;
+
+            var mockCategoryRepository = new Mock<ICategoryRepository>();
+
+            var breadManagementController = new BreadManagementController(mockBreadRepository.Object, mockCategoryRepository.Object);
+
+            //act
+            var result = breadManagementController.AddBread(breadEditViewModel);
+
+            //assert
+            var viewResult = Assert.IsType<ViewResult>(result);
+            Assert.NotNull(viewResult.Model);
+            Assert.True(string.IsNullOrEmpty(viewResult.ViewName));
+        }
     }
 }
