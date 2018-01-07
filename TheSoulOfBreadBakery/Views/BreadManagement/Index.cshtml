@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Bread>
+
+<h2>Product Management</h2>
+
+@if (!Model.Any())
+{
+    <tr><td colspan="3" class="text-center">No products at this point :()</td></tr>
+}
+else
+{
+    <table class="table table-condensed table-bordered">
+        <tr>
+            <th>Bread ID</th>
+            <th>Image</th>
+            <th>Name</th>
+            <th>In stock</th>
+            <th>Price</th>
+            <th>Actions</th>
+        </tr>
+        @foreach (var bread in Model)
+        {
+            <tr>
+                <td>@bread.BreadId</td>
+                <td><img src="@bread.ImageThumbnailUrl" /></td>
+                <td>@bread.Name</td>
+                <td><input type="checkbox" asp-for="@bread.InStock" />
+                <td>@bread.Price</td>
+                <td>
+                    <form asp-action="DeleteBread" asp-route-breadId="@bread.BreadId" method="post">
+                        <a class="btn btn-sm btn-primary" asp-action="EditBread" asp-route-breadId="@bread.BreadId">Edit</a>
+                        <button type="submit" onclick="return confirm('Do you really want to delete this bread?');" class="btn btn-sm btn-danger">
+                            Delete
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </table>
+}
+<p>
+    <a class="btn btn-primary" asp-action="AddBread">Add new bread</a>
+</p>

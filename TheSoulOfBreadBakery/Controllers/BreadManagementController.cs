@@ -9,8 +9,7 @@ using TheSoulOfBreadBakery.ViewModels;
 
 namespace TheSoulOfBreadBakery.Controllers
 {
-    [Authorize(Roles = "Administrators")]
-    [Authorize(Policy = "DeleteBread")]
+    [Authorize(Roles = "Administrator")]
     public class BreadManagementController : Controller
     {
         private readonly IBreadRepository _breadRepository;

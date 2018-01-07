@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using TheSoulOfBreadBakery.Services;
+using TheSoulOfBreadBakery.Extensions;
 
 namespace TheSoulOfBreadBakery
 {
@@ -55,7 +56,6 @@ namespace TheSoulOfBreadBakery
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("AdministratorOnly", policy => policy.RequireRole("Administrator"));
-                options.AddPolicy("DeleteBread", policy => policy.RequireClaim("Delete Bread", "Delete Bread"));
             });
 
             services.AddMemoryCache();
@@ -65,6 +65,8 @@ namespace TheSoulOfBreadBakery
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            app.UseDatabaseMigration();
+
             app.UseDeveloperExceptionPage();
             app.UseStatusCodePages();
             app.UseStaticFiles();

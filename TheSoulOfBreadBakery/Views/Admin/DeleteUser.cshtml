@@ -1,0 +1,8 @@
+﻿@model TheSoulOfBreadBakery.ViewModels.Auth.DeleteUserViewModel
+@{ 
+    ViewData["Title"] = "Delete User";
+}
+
+<h2>Are you sure you want to delete user @Model.Email</h2>
+
+<a class="btn btn-sm btn-primary" asp-action="Destroy" asp-route-id="@Model.Id">Confirm deletion!</a>

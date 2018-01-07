@@ -11,7 +11,7 @@ using TheSoulOfBreadBakery.ViewModels.Auth;
 
 namespace TheSoulOfBreadBakery.Controllers
 {
-    [Authorize(Roles = "Administrators")]
+    [Authorize(Roles = "Administrator")]
     public class AdminController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -102,24 +102,55 @@ namespace TheSoulOfBreadBakery.Controllers
             return RedirectToAction("UserManagement", _userManager.Users);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> DeleteUser(string userId)
-        {
-            var user = await _userManager.FindByIdAsync(userId);
+        //[HttpPost]
+        //public async Task<IActionResult> DeleteUser(string userId)
+        //{
+        //    var user = await _userManager.FindByIdAsync(userId);
 
-            if (user != null)
+        //    if (user != null)
+        //    {
+        //        var result = await _userManager.DeleteAsync(user);
+        //        if (result.Succeeded)
+        //            return RedirectToAction("UserManagement");
+        //        else
+        //            ModelState.AddModelError("", "Something went wrong while deleting this user.");
+        //    }
+        //    else
+        //    {
+        //        ModelState.AddModelError("", "This user can't be found");
+        //    }
+        //    return View("UserManagement", _userManager.Users);
+        //}
+       
+        public async Task<IActionResult> DeleteUser(DeleteUserViewModel deleteUserViewModel)
+        {
+            var user = await _userManager.FindByIdAsync(deleteUserViewModel.Id);
+
+            if (user == null)
             {
-                IdentityResult result = await _userManager.DeleteAsync(user);
-                if (result.Succeeded)
-                    return RedirectToAction("UserManagement");
-                else
-                    ModelState.AddModelError("", "Something went wrong while deleting this user.");
+                return NotFound();
             }
-            else
+
+            return View(new DeleteUserViewModel
             {
-                ModelState.AddModelError("", "This user can't be found");
+                Id = user.Id,
+                Email = user.Email
+            });
+        }
+        
+        public async Task<IActionResult> Destroy(DeleteUserViewModel deleteUserViewModel)
+        {
+            var user = await _userManager.FindByIdAsync(deleteUserViewModel.Id);
+
+            if (user == null)
+            {
+                return NotFound();
             }
-            return View("UserManagement", _userManager.Users);
+
+            await _userManager.DeleteAsync(user);
+
+            TempData["SuccessMessage"] = $"User {user.Email} deleted!";
+            return RedirectToAction("UserManagement");
         }
 
 

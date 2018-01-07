@@ -17,21 +17,17 @@ else
             <th>Actions</th>
         </tr>
 
-        @foreach (IdentityUser user in Model)
+        @foreach (ApplicationUser user in Model)
         {
             <tr>
-                <td>@user.Id</td>
-                <td>@user.UserName</td>
-                <td>@user.Email</td>
+                <th>@user.Id</th>
+                <th>@user.UserName</th>
+                <th>@user.Email</th>
 
-                <td>
-                    <form asp-action="DeleteUser" asp-route-id="@user.Id" method="post">
-                        <a class="btn btn-sm btn-primary" asp-action="EditUser" asp-route-id="@user.Id">Edit</a>
-                        <button type="submit" onclick="return confirm('Do you really want to delete this user?');" class="btn btn-sm btn-danger">
-                            Delete
-                        </button>
-                    </form>
-                </td>
+                <th>
+                    <a class="btn btn-sm btn-primary" asp-action="EditUser" asp-route-id="@user.Id">Edit</a>
+                    <a class="btn btn-sm btn-primary" asp-action="DeleteUser" asp-route-id="@user.Id">Delete</a>
+                </th>
             </tr>
         }
     </table>

@@ -1,0 +1,96 @@
+﻿@model TheSoulOfBreadBakery.ViewModels.BreadEditViewModel
+
+<h2>Edit bread</h2>
+
+<form asp-controller="BreadManagement" asp-action="EditBread" method="post" class="form-horizontal" role="form">
+    <h4>Update the Bread details below</h4>
+    <hr />
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="form-group">
+        <label asp-for="Bread.BreadId" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="Bread.BreadId" class="form-control" />@*readonly="readonly"*@
+            <span asp-validation-for="Bread.BreadId" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Bread.Name" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="Bread.Name" class="form-control" />
+            <span asp-validation-for="Bread.Name" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Bread.ShortDescription" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="Bread.ShortDescription" class="form-control" />
+            <span asp-validation-for="Bread.ShortDescription" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Bread.LongDescription" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="Bread.LongDescription" class="form-control" />
+            <span asp-validation-for="Bread.LongDescription" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Bread.Price" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="Bread.Price" class="form-control" />
+            <span asp-validation-for="Bread.Price" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Bread.ImageThumbnailUrl" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="Bread.ImageThumbnailUrl" class="form-control" />
+            <span asp-validation-for="Bread.ImageThumbnailUrl" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Bread.ImageUrl" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="Bread.ImageUrl" class="form-control" />
+            <span asp-validation-for="Bread.ImageUrl" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Bread.InStock" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="Bread.InStock" class="form-control" />
+            <span asp-validation-for="Bread.InStock" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Bread.IsBreadOfTheWeek" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="Bread.IsBreadOfTheWeek" class="form-control" />
+            <span asp-validation-for="Bread.IsBreadOfTheWeek" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Categories" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <select asp-for="CategoryId" class="form-control"
+                    asp-items="Model.Categories"></select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-primary" value="Update bread" />
+        </div>
+    </div>
+</form>
+
