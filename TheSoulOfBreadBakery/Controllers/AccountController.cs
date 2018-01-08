@@ -21,17 +21,20 @@ namespace TheSoulOfBreadBakery.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
+        private readonly ShoppingCart _shoppingCart;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
-            ILogger<AccountController> logger)
+            ILogger<AccountController> logger,
+            ShoppingCart shoppingCart)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _logger = logger;
+            _shoppingCart = shoppingCart;
         }
 
         [TempData]
@@ -244,6 +247,7 @@ namespace TheSoulOfBreadBakery.Controllers
         {
             await _signInManager.SignOutAsync();
             _logger.LogInformation("User logged out.");
+            _shoppingCart.ClearCart();
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
